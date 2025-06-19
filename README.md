@@ -8,6 +8,28 @@ to be better than any of them.  It only attempts to be a reasonably efficient,
 moderately useful FFT that can use fixed or floating data types and can be 
 incorporated into someone's C program in a few minutes with trivial licensing.
 
+主要特点
+简单易用：核心代码量少，便于理解和集成到项目中。
+数据类型灵活：支持多种数据类型，包括float、double、int16_t、int32_t和SIMD（需目标 CPU 支持 SSE 指令集）。
+多功能支持：提供一维和多维 FFT、实值优化 FFT、快速卷积 FIR 滤波和频谱图像创建等功能。
+线程安全：核心例程是线程安全的（但tools目录下的部分工具不是）。
+构建系统灵活：支持传统的 Make 和现代的 CMake 构建系统。
+
+性能
+在 Athlon XP 2100+、gcc 2.96 和float数据类型的环境下，Kiss 执行 10000 次 1024 点复 FFT 需要 0.63 秒的 CPU 时间。
+相比之下，md5sum 处理相同数量的数据需要两倍的时间。处理 5 分钟的 CD 质量音频（nfft = 1024）不到一秒。
+
+许可证
+采用修订后的 BSD 许可证，基本上可以自由使用和修改，但需要给予适当的引用，且不提供保证。
+该许可证与 GPL 和闭源商业软件兼容。
+作者
+Mark Borgerding，邮箱：Mark@Borgerding.net
+TODO
+为奇数长度的 FFT 添加实值优化。
+文档化 / 重新审视输入 / 输出 FFT 的缩放。
+编写文档描述kiss_fastfir.c中的重叠（尾部）裁剪快速卷积滤波。
+使用定点测试所有tools/目录下的代码（kiss_fastfir.c目前不支持，可能还有其他文件）。
+
 ## USAGE:
 
 The basic usage for 1-d complex FFT is:
